@@ -6,6 +6,9 @@
     <div class="container my-5">
         <h1>Inscription</h1>
         <hr>
-        {{ form(formRegister) }}
+        <form method="post" {{ form_enctype(formRegister) }} data-turbo="false">
+            {{ form_widget(formRegister) }}
+            <button type="submit" class="btn btn-success">S'inscrire</button>
+        </form>
     </div>
 {% endblock %}
