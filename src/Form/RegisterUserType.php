@@ -16,6 +16,18 @@ class RegisterUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('firstName', TextType::class, [
+                'label' => 'Votre prénom',
+                'attr' => [
+                    'placeholder' => 'Veuillez renseigner votre prénom'
+                ]
+            ])
+            ->add('lastName', TextType::class, [
+                'label' => 'Votre nom',
+                'attr' => [
+                    'placeholder' => 'Veuillez renseigner votre nom'
+                ]
+            ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre Email',
                 'attr' => [
@@ -27,18 +39,6 @@ class RegisterUserType extends AbstractType
                 'label' => 'Votre mot de passe',
                 'attr' => [
                     'placeholder' => 'Veuillez renseigner votre mot de passe'
-                ]
-            ])
-            ->add('firstName', TextType::class, [
-                'label' => 'Votre prénom',
-                'attr' => [
-                    'placeholder' => 'Veuillez renseigner votre prénom'
-                ]
-            ])
-            ->add('lastName', TextType::class, [
-                'label' => 'Votre nom',
-                'attr' => [
-                    'placeholder' => 'Veuillez renseigner votre nom'
                 ]
             ])
             ->add('submit', SubmitType::class)
