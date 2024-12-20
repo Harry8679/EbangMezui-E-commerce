@@ -24,6 +24,9 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
+
+            // Rediriger après le traitement du formulaire
+            return $this->redirectToRoute('app_home'); // ou une autre route
         }
 
         return $this->render('register/index.html.twig', [
