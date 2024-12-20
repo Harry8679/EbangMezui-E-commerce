@@ -3,5 +3,9 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Inscription</h1>
+    <div class="container my-5">
+        <h1>Inscription</h1>
+        <hr>
+        {{ form(formRegister) }}
+    </div>
 {% endblock %}
