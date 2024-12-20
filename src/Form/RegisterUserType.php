@@ -41,7 +41,12 @@ class RegisterUserType extends AbstractType
                     'placeholder' => 'Veuillez renseigner votre mot de passe'
                 ]
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Valider',
+                'attr' => [
+                    'class' => 'btn btn-success'
+                ]
+            ])
         ;
     }
 
