@@ -53,13 +53,6 @@ class RegisterUserType extends AbstractType
                 ],
                 'mapped' => false
             ])
-            // ->add('roles')
-            // ->add('password', PasswordType::class, [
-            //     'label' => 'Votre mot de passe',
-            //     'attr' => [
-            //         'placeholder' => 'Veuillez renseigner votre mot de passe'
-            //     ]
-            // ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',
                 'attr' => [
