@@ -7,8 +7,54 @@
         <h1>Inscription</h1>
         <hr>
         {{ form_start(formRegister, {'attr': {'data-turbo': 'false'}}) }}
-            {{ form_widget(formRegister) }}
+            <div class="mb-3">
+                {{ form_row(formRegister.firstName) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(formRegister.lastName) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(formRegister.email) }}
+            </div>
+            <div class="mb-3 position-relative">
+                {{ form_label(formRegister.plainPassword.first) }}
+                <div class="input-group">
+                    {{ form_widget(formRegister.plainPassword.first, {'attr': {'class': 'form-control', 'type': 'password', 'id': 'password'}}) }}
+                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                {{ form_errors(formRegister.plainPassword.first) }}
+            </div>
+            <div class="mb-3 position-relative">
+                {{ form_label(formRegister.plainPassword.second) }}
+                <div class="input-group">
+                    {{ form_widget(formRegister.plainPassword.second, {'attr': {'class': 'form-control', 'type': 'password', 'id': 'confirm-password'}}) }}
+                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="confirm-password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                {{ form_errors(formRegister.plainPassword.second) }}
+            </div>
             <button type="submit" class="btn btn-success">S'inscrire</button>
         {{ form_end(formRegister) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    const targetInput = document.getElementById(targetId);
+                    const isPassword = targetInput.getAttribute('type') === 'password';
+
+                    targetInput.setAttribute('type', isPassword ? 'text' : 'password');
+                    button.innerHTML = `<i class="fas fa-${isPassword ? 'eye-slash' : 'eye'}"></i>`;
+                });
+            });
+        });
+    </script>
 {% endblock %}
