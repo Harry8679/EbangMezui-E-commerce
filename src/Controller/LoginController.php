@@ -12,7 +12,7 @@ class LoginController extends AbstractController
     #[Route('/connexion', name: 'app_login')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('login/index.html.twig', [
+        return $this->render('login/login.html.twig', [
             'controller_name' => 'LoginController',
         ]);
     }
