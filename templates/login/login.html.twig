@@ -12,47 +12,19 @@
         {% endif %}
 
         <form action="{{ path('app_login') }}" method="post">
-            <label for="username">Votre email:</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}">
+            <div class="mb-3">
+                <label for="username" class="form-label">Votre email:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control">
+            </div>
 
-            <label for="password">Votre mot de passe:</label>
-            <input type="password" id="password" name="_password" value="{{ last_username }}">
+            <div class="mb-3">
+                <label for="password" class="form-label">Votre mot de passe:</label>
+                <input type="password" id="password" name="_password" class="form-control">
+            </div>
 
             <button type="submit" class="btn btn-success mt-3">Se connecter</button>
         </form>
 
-        {# {{ form_start(formRegister, {'attr': {'data-turbo': 'false'}}) }}
-            <div class="mb-3">
-                {{ form_row(formRegister.firstName) }}
-            </div>
-            <div class="mb-3">
-                {{ form_row(formRegister.lastName) }}
-            </div>
-            <div class="mb-3">
-                {{ form_row(formRegister.email) }}
-            </div>
-            <div class="mb-3 position-relative">
-                {{ form_label(formRegister.plainPassword.first) }}
-                <div class="input-group">
-                    {{ form_widget(formRegister.plainPassword.first, {'attr': {'class': 'form-control', 'id': 'register_user_plainPassword_first'}}) }}
-                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="register_user_plainPassword_first">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-                {{ form_errors(formRegister.plainPassword.first) }}
-            </div>
-            <div class="mb-3 position-relative">
-                {{ form_label(formRegister.plainPassword.second) }}
-                <div class="input-group">
-                    {{ form_widget(formRegister.plainPassword.second, {'attr': {'class': 'form-control', 'id': 'register_user_plainPassword_second'}}) }}
-                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="register_user_plainPassword_second">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-                {{ form_errors(formRegister.plainPassword.second) }}
-            </div>
-            {# <button type="submit" class="btn btn-success">S'inscrire</button> #}
-        {# {{ form_end(formRegister) }} #}
     </div>
 {% endblock %}
 

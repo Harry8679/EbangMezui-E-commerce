@@ -23,4 +23,11 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername
         ]);
     }
+
+    #[Route('/deconnexion', name: 'app_logout')]
+    public function logout()
+    {
+        // controller can be blank : it will never be called
+        throw new \Exception("Dont't forget to activate logout in security.yml");
+    }
 }
