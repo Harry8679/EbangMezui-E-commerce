@@ -29,7 +29,7 @@ class RegisterController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('register/index.html.twig', [
+        return $this->render('register/register.html.twig', [
             'formRegister' => $form->createView()
         ]);
     }
