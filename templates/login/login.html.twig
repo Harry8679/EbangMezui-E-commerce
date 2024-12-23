@@ -12,11 +12,13 @@
         {% endif %}
 
         <form action="{{ path('app_login') }}" method="post">
-            <label for="username">Email:</label>
+            <label for="username">Votre email:</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}">
 
-            <label for="password">Mot de passe:</label>
+            <label for="password">Votre mot de passe:</label>
             <input type="password" id="password" name="_password" value="{{ last_username }}">
+
+            <button type="submit" class="btn btn-success mt-3">Se connecter</button>
         </form>
 
         {# {{ form_start(formRegister, {'attr': {'data-turbo': 'false'}}) }}
