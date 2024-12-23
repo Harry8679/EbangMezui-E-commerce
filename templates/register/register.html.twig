@@ -4,68 +4,43 @@
 
 {% block body %}
     <div class="container my-5">
-        <h1>Inscription</h1>
-        <hr>
-        {{ form_start(formRegister, {'attr': {'data-turbo': 'false'}}) }}
-            <div class="mb-3">
-                {{ form_row(formRegister.firstName) }}
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center">Inscription</h1>
+                <hr>
+                {{ form_start(formRegister, {'attr': {'data-turbo': 'false'}}) }}
+                    <div class="mb-3">
+                        {{ form_row(formRegister.firstName) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(formRegister.lastName) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(formRegister.email) }}
+                    </div>
+                    <div class="mb-3 position-relative">
+                        {{ form_label(formRegister.plainPassword.first) }}
+                        <div class="input-group">
+                            {{ form_widget(formRegister.plainPassword.first, {'attr': {'class': 'form-control', 'id': 'register_user_plainPassword_first'}}) }}
+                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="register_user_plainPassword_first">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        {{ form_errors(formRegister.plainPassword.first) }}
+                    </div>
+                    <div class="mb-3 position-relative">
+                        {{ form_label(formRegister.plainPassword.second) }}
+                        <div class="input-group">
+                            {{ form_widget(formRegister.plainPassword.second, {'attr': {'class': 'form-control', 'id': 'register_user_plainPassword_second'}}) }}
+                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="register_user_plainPassword_second">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        {{ form_errors(formRegister.plainPassword.second) }}
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">S'inscrire</button>
+                {{ form_end(formRegister) }}
             </div>
-            <div class="mb-3">
-                {{ form_row(formRegister.lastName) }}
-            </div>
-            <div class="mb-3">
-                {{ form_row(formRegister.email) }}
-            </div>
-            <div class="mb-3 position-relative">
-                {{ form_label(formRegister.plainPassword.first) }}
-                <div class="input-group">
-                    {{ form_widget(formRegister.plainPassword.first, {'attr': {'class': 'form-control', 'id': 'register_user_plainPassword_first'}}) }}
-                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="register_user_plainPassword_first">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-                {{ form_errors(formRegister.plainPassword.first) }}
-            </div>
-            <div class="mb-3 position-relative">
-                {{ form_label(formRegister.plainPassword.second) }}
-                <div class="input-group">
-                    {{ form_widget(formRegister.plainPassword.second, {'attr': {'class': 'form-control', 'id': 'register_user_plainPassword_second'}}) }}
-                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="register_user_plainPassword_second">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-                {{ form_errors(formRegister.plainPassword.second) }}
-            </div>
-            {# <button type="submit" class="btn btn-success">S'inscrire</button> #}
-        {{ form_end(formRegister) }}
+        </div>
     </div>
-{% endblock %}
-
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Sélectionnez tous les boutons de bascule
-            document.querySelectorAll('.toggle-password').forEach(button => {
-                button.addEventListener('click', () => {
-                    // Obtenez l'ID de l'input à basculer
-                    const targetId = button.getAttribute('data-target');
-                    const targetInput = document.getElementById(targetId);
-
-                    if (targetInput) {
-                        // Changez le type du champ (password <-> text)
-                        const isPassword = targetInput.getAttribute('type') === 'password';
-                        targetInput.setAttribute('type', isPassword ? 'text' : 'password');
-
-                        // Changez l'icône en conséquence
-                        button.innerHTML = `<i class="fas fa-${isPassword ? 'eye-slash' : 'eye'}"></i>`;
-                    } else {
-                        console.error(`Élément avec l'ID "${targetId}" introuvable.`);
-                    }
-                });
-            });
-        });
-
-    </script>
 {% endblock %}
