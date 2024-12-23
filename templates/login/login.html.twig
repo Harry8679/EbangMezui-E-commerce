@@ -4,34 +4,38 @@
 
 {% block body %}
     <div class="container my-5">
-        <h1>Connexion</h1>
-        <hr>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center">Connexion</h1>
+                <hr>
 
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-        <form action="{{ path('app_login') }}" method="post">
-            <div class="mb-3">
-                <label for="username" class="form-label">Votre email:</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control">
+                <form action="{{ path('app_login') }}" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Votre email:</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control">
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <label for="password" class="form-label">Votre mot de passe:</label>
+                        <div class="input-group">
+                            <input type="password" id="password" name="_password" class="form-control">
+                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 mt-3">Se connecter</button>
+                </form>
             </div>
-
-            <div class="mb-3 position-relative">
-                <label for="password" class="form-label">Votre mot de passe:</label>
-                <div class="input-group">
-                    <input type="password" id="password" name="_password" class="form-control" value="">
-                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="password">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-success mt-3">Se connecter</button>
-        </form>
-
+        </div>
     </div>
 {% endblock %}
+
 
 {% block javascripts %}
     {{ parent() }}
