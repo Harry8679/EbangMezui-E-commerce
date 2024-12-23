@@ -44,3 +44,33 @@
         </div>
     </div>
 {% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sélectionnez tous les boutons de bascule
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Obtenez l'ID de l'input à basculer
+                    const targetId = button.getAttribute('data-target');
+                    const targetInput = document.getElementById(targetId);
+
+                    if (targetInput) {
+                        // Changez le type du champ (password <-> text)
+                        const isPassword = targetInput.getAttribute('type') === 'password';
+                        targetInput.setAttribute('type', isPassword ? 'text' : 'password');
+
+                        // Changez l'icône en conséquence
+                        button.innerHTML = `<i class="fas fa-${isPassword ? 'eye-slash' : 'eye'}"></i>`;
+                    } else {
+                        console.error(`Élément avec l'ID "${targetId}" introuvable.`);
+                    }
+                });
+            });
+        });
+
+    </script>
+{% endblock %}
