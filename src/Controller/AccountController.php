@@ -25,11 +25,20 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData());
+            // Par exemple, mettez à jour l'utilisateur
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($user);
+            // $entityManager->flush();
+
+            // Redirection après soumission réussie
+            $this->addFlash('success', 'Votre mot de passe a été mis à jour avec succès.');
+
+            return $this->redirectToRoute('app_account'); // Redirigez vers une route appropriée
         }
-        
+
         return $this->render('account/password.html.twig', [
-            'updatePasswordForm' => $form->createView()
+            'updatePasswordForm' => $form->createView(),
         ]);
     }
+
 }
