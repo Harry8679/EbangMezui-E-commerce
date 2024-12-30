@@ -60,7 +60,13 @@ class PasswordUserType extends AbstractType
                 ]
             ])
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-                die('Ok Mon Event Marche');
+                $form = $event->getForm();
+                $user = $form->getConfig()->getOptions()['data'];
+                dd($user);
+                $passwordHasher = $form->getConfig()->getOptions()['passwordHasher'];
+
+                // 1. Récupérer le mot de passe saisi par l'utilisateur et le comparer au mot de passe en base de données.
+                $isValid = $passwordHasher;
             });
     }
 
