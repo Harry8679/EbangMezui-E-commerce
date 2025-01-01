@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\PasswordUserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ class AccountController extends AbstractController
     }
 
     #[Route('/compte/modifier-votre-mot-de-passe', name: 'app_account_modify_password')]
-    public function password(Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    public function password(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
 
@@ -30,7 +31,8 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData()); 
+            $em->flush();
+            // dd($form->getData()); 
             // Par exemple, mettez à jour l'utilisateur
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($user);
