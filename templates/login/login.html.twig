@@ -44,19 +44,19 @@
     {{ parent() }}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Sélectionnez tous les boutons de bascule
+            // Ajout des événements aux boutons toggle-password
             document.querySelectorAll('.toggle-password').forEach(button => {
                 button.addEventListener('click', () => {
-                    // Obtenez l'ID de l'input à basculer
+                    // Récupération de l'élément cible via l'attribut data-target
                     const targetId = button.getAttribute('data-target');
                     const targetInput = document.getElementById(targetId);
 
                     if (targetInput) {
-                        // Changez le type du champ (password <-> text)
-                        const isPassword = targetInput.getAttribute('type') === 'password';
-                        targetInput.setAttribute('type', isPassword ? 'text' : 'password');
+                        // Basculer entre type "password" et "text"
+                        const isPassword = targetInput.type === 'password';
+                        targetInput.type = isPassword ? 'text' : 'password';
 
-                        // Changez l'icône en conséquence
+                        // Mettre à jour l'icône
                         button.innerHTML = `<i class="fas fa-${isPassword ? 'eye-slash' : 'eye'}"></i>`;
                     } else {
                         console.error(`Élément avec l'ID "${targetId}" introuvable.`);
@@ -64,5 +64,6 @@
                 });
             });
         });
+
     </script>
 {% endblock %}

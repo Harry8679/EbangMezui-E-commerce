@@ -6,6 +6,8 @@ use App\Form\PasswordUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class AccountController extends AbstractController
@@ -17,14 +19,18 @@ class AccountController extends AbstractController
     }
 
     #[Route('/compte/modifier-votre-mot-de-passe', name: 'app_account_modify_password')]
-    public function password(Request $request): Response
+    public function password(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = $this->getUser();
 
-        $form = $this->createForm(PasswordUserType::class, $user);
+        $form = $this->createForm(PasswordUserType::class, $user, [
+            'passwordHasher' => $passwordHasher
+        ]);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            dd($form->getData()); 
             // Par exemple, mettez à jour l'utilisateur
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($user);
