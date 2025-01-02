@@ -32,11 +32,6 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            // dd($form->getData()); 
-            // Par exemple, mettez à jour l'utilisateur
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($user);
-            // $entityManager->flush();
 
             // Redirection après soumission réussie
             $this->addFlash('success', 'Votre mot de passe a été mis à jour avec succès.');
