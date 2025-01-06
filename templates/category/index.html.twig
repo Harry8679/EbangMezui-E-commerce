@@ -13,7 +13,7 @@
                 <div class="col-md-3 text-center">
                     <a href="{{ path('app_product', { slug: product.slug }) }}">
                         <img src="/uploads/{{ product.illustration }}" alt="{{ product.illustration }}" class="img-fluid">
-                        <strong>{{ product.name }}</strong>
+                        <span class="d-block fw-bold text-block">{{ product.name }}</strong>
                     </a>
                     <span class="d-block">{{ product.priceWithTaxes }} €</span>
                 </div>
