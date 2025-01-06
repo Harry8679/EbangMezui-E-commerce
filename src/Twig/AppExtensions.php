@@ -16,6 +16,6 @@ class AppExtensions extends AbstractExtension
 
     public function formatPrice($number)
     {
-        return number_format($number, '2', ','). '€';
+        return number_format($number, '2', ','). ' €';
     }
 }

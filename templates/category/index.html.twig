@@ -15,7 +15,7 @@
                         <img src="/uploads/{{ product.illustration }}" alt="{{ product.illustration }}" class="img-fluid">
                         <span class="d-block fw-bold text-block">{{ product.name }}</strong>
                     </a>
-                    <span class="d-block">{{ product.priceWithTaxes }} €</span>
+                    <span class="d-block">{{ product.priceWithTaxes|price }}</span>
                 </div>
             {% endfor %}
         </div>
