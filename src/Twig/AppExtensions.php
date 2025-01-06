@@ -31,7 +31,7 @@ class AppExtensions extends AbstractExtension implements GlobalsInterface
     public function getGlobals(): array
     {
         return [
-            'allCategories' => $$this->categoryRepository->findAll()
+            'allCategories' => $this->categoryRepository->findAll()
         ];
     }
 }

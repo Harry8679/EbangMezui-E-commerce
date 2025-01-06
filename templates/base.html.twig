@@ -38,6 +38,11 @@
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
 							</li>
+							{% for category in allCategories %}
+								<li class="nav-item">
+									<a class="nav-link" href="#">{{ category.name }}</a>
+								</li>
+							{% endfor %}
 							<li class="nav-item">
 								<a class="nav-link" href="#">Link</a>
 							</li>
