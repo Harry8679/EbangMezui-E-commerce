@@ -14,8 +14,8 @@ class AppExtensions extends AbstractExtension
         ];
     }
 
-    public function formatPrice()
+    public function formatPrice($number)
     {
-        return 'Bonjour à tous';
+        return number_format($number, '2', ','). '€';
     }
 }
