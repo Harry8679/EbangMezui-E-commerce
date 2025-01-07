@@ -4,8 +4,9 @@ namespace App\Classe;
 
 class Cart
 {
-    public function add($id)
+    public function add($product)
     {
+        dd($product);
         // Appeler la session de symfony
 
         // Créer ma session Cart
