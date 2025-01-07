@@ -25,4 +25,9 @@ class Cart
         // Créer ma session Cart
         $this->requestStack->getSession()->set('cart', $cart);
     }
+
+    public function getCart()
+    {
+        return $this->requestStack->getSession()->get('cart');
+    }
 }
