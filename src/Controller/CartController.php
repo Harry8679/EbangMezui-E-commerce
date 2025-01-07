@@ -27,6 +27,10 @@ class CartController extends AbstractController
 
         $cart->add($product);
 
-        dd("Produit ajouté au panier");
+        $this->addFlash('success', 'Produit correctement ajouté à votre panier.');
+
+        return $this->redirectToRoute('app_product', [
+            'slug' => $product->getSlug()
+        ]);
     }
 }
