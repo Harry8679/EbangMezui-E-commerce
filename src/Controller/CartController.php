@@ -13,4 +13,10 @@ class CartController extends AbstractController
     {
         return $this->render('cart/index.html.twig');
     }
+
+    #[Route('/cart/add/{id}', name: 'app_cart')]
+    public function add($id): Response
+    {
+        dd($id);
+    }
 }
