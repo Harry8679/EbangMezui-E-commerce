@@ -47,9 +47,12 @@ class Cart
 
     public function fullQuantity()
     {
-        // $cart = $this->requestStack->getSession()->get('cart');
         $cart = $this->requestStack->getSession()->get('cart', []);
         $quantity = 0;
+
+        if (!isset($cart)) {
+            return $quantity;
+        }
 
         foreach ($cart as $product) {
             $quantity = $quantity + $product['quantity'];
@@ -62,6 +65,10 @@ class Cart
     {
         $cart = $this->requestStack->getSession()->get('cart', []);
         $price = 0;
+
+        if (!isset($cart)) {
+            return $price;
+        }
 
         foreach ($cart as $product) {
             // Calcul avec le prix TTC (getPriceWithTaxes)
