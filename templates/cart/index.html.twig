@@ -18,7 +18,7 @@
                             <span class="d-block small">Prix unitaire : {{ product.object.priceWithTaxes|price }}</span>
                         </div>
                         <div class="col-md-2">
-                            x {{ product.quantity }}
+                            <span class="badge text-bg-secondary">x {{ product.quantity }}</span>
                         </div>
                         <div class="col-md-2">
                             <strong>{{ (product.quantity * product.object.priceWithTaxes)|price }}</strong>
