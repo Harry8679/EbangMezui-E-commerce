@@ -53,6 +53,6 @@ class CartController extends AbstractController
     {
         $cart->remove();
 
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_cart');
     }
 }

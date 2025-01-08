@@ -63,8 +63,4 @@ class Cart
 
         return $cart;
     }
-    // public function getCart()
-    // {
-    //     return $this->requestStack->getSession()->get('cart');
-    // }
 }
