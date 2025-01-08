@@ -13,18 +13,26 @@ class Cart
     
     public function add($product)
     {
-        // Appeler la session de symfony
-        $session = $this->requestStack->getSession();
+        // Appeler la session de Symfony
+        $cart = $this->requestStack->getSession()->get('cart', []); // Initialiser avec un tableau vide si la session est vide
 
         // Ajouter une quantité +1 à mon produit
-        $cart[$product->getId()] = [
-            'object' => $product,
-            'quantity' => 1
-        ];
+        if (isset($cart[$product->getId()])) {
+            $cart[$product->getId()] = [
+                'object' => $product,
+                'quantity' => $cart[$product->getId()]['quantity'] + 1
+            ];
+        } else {
+            $cart[$product->getId()] = [
+                'object' => $product,
+                'quantity' => 1
+            ];
+        }
         
         // Créer ma session Cart
         $this->requestStack->getSession()->set('cart', $cart);
     }
+
 
     public function getCart()
     {
