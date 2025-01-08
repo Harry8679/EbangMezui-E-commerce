@@ -58,6 +58,11 @@ class Cart
         return $quantity;
     }
 
+    public function getTotalWithTaxes()
+    {
+        return 100;
+    }
+
     public function remove()
     {
         return $this->requestStack->getSession()->remove('cart');
