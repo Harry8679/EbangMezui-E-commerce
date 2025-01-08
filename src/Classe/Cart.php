@@ -16,19 +16,18 @@ class Cart
         // Appeler la session de Symfony
         $cart = $this->requestStack->getSession()->get('cart', []); // Initialiser avec un tableau vide si la session est vide
 
-        // Ajouter une quantité +1 à mon produit
-        if (isset($cart[$product->getId()])) {
-            $cart[$product->getId()] = [
-                'object' => $product,
-                'quantity' => $cart[$product->getId()]['quantity'] + 1
-            ];
+        // Vérifier si l'entrée est valide
+        if (isset($cart[$product->getId()]) && is_array($cart[$product->getId()])) {
+            // Ajouter une quantité +1 au produit existant
+            $cart[$product->getId()]['quantity'] += 1;
         } else {
+            // Initialiser le produit avec une quantité de 1
             $cart[$product->getId()] = [
                 'object' => $product,
-                'quantity' => 1
+                'quantity' => 1,
             ];
         }
-        
+
         // Créer ma session Cart
         $this->requestStack->getSession()->set('cart', $cart);
     }
@@ -37,10 +36,10 @@ class Cart
     {
         $cart = $this->requestStack->getSession()->get('cart');
 
-        if ($cart[$id]['quantity'] > 1) {
-            $cart[$id] = $cart[$id]['quantity'] -1;
+        if (isset($cart[$id]) && $cart[$id]['quantity'] > 1) {
+            $cart[$id]['quantity']--; // Décrémente uniquement la quantité
         } else {
-            unset($cart[$id]);               
+            unset($cart[$id]); // Supprime l'entrée si la quantité tombe à 0
         }
 
         $this->requestStack->getSession()->set('cart', $cart);
@@ -53,6 +52,19 @@ class Cart
 
     public function getCart()
     {
-        return $this->requestStack->getSession()->get('cart');
+        $cart = $this->requestStack->getSession()->get('cart', []);
+
+        // Filtrer les entrées invalides
+        foreach ($cart as $id => $item) {
+            if (!is_array($item) || !isset($item['object'], $item['quantity'])) {
+                unset($cart[$id]); // Supprimer les données incorrectes
+            }
+        }
+
+        return $cart;
     }
+    // public function getCart()
+    // {
+    //     return $this->requestStack->getSession()->get('cart');
+    // }
 }
