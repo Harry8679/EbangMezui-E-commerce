@@ -60,7 +60,16 @@ class Cart
 
     public function getTotalWithTaxes()
     {
-        return 100;
+        $cart = $this->requestStack->getSession()->get('cart', []);
+        $price = 0;
+
+        foreach ($cart as $product) {
+            // Calcul avec le prix TTC (getPriceWithTaxes)
+            $price += $product['object']->getPriceWithTaxes() * $product['quantity'];
+        }
+
+        // Arrondir le total à deux décimales
+        return round($price, 2);
     }
 
     public function remove()
