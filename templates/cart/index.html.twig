@@ -18,7 +18,7 @@
                             <span class="d-block small">Prix unitaire : {{ product.object.priceWithTaxes|price }}</span>
                         </div>
                         <div class="col-md-2">
-                            <span class="badge text-bg-secondary">x {{ product.quantity }}</span> <a href="{{ path('app_cart_add', { id: product.object.id }) }}">+</a>
+                            <a href="{{ path('app_cart_decrease', { id: product.object.id }) }}">-</a> <span class="badge text-bg-secondary">x {{ product.quantity }}</span> <a href="{{ path('app_cart_add', { id: product.object.id }) }}">+</a>
                         </div>
                         <div class="col-md-2">
                             <strong>{{ (product.quantity * product.object.priceWithTaxes)|price }}</strong>
