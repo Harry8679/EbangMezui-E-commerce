@@ -33,6 +33,10 @@ class Cart
         $this->requestStack->getSession()->set('cart', $cart);
     }
 
+    public function remove()
+    {
+        return $this->requestStack->getSession()->remove('cart');
+    }
 
     public function getCart()
     {
