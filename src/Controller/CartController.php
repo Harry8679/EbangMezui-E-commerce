@@ -34,8 +34,18 @@ class CartController extends AbstractController
 
         // return $this->redirectToRoute('app_product', [
         //     'slug' => $product->getSlug()
-        // ]);
+        // ]);c     
         return $this->redirect($request->headers->get('referer'));
+    }
+
+    #[Route('/cart/decrease/{id}', name: 'app_cart_decrease')]
+    public function decrease($id, Cart $cart): Response
+    {
+        $cart->decrease($id);
+
+        $this->addFlash('success', 'Produit correctement supprimé de votre panier');
+
+        return $this->redirectToRoute('app_cart');
     }
 
     #[Route('/cart/remove', name: 'app_cart_remove')]
