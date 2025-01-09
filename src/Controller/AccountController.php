@@ -73,7 +73,7 @@ class AccountController extends AbstractController
 
             $this->addFlash('success', 'Votre adresse a bien été enregistrée.');
 
-            $this->redirectToRoute('app_account');
+            return $this->redirectToRoute('app_account_address');
         }
 
         return $this->render('account/addressForm.html.twig', [
