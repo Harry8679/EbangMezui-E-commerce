@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\AddressUserType;
 use App\Form\PasswordUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,9 +52,15 @@ class AccountController extends AbstractController
     }
 
     #[Route('/compte/address/ajouter', name: 'app_account_address_form')]
-    public function addressForm(): Response
+    public function addressForm(Request $request): Response
     {
-        return $this->render('account/addressForm.html.twig');
+        $form = $this->createForm(AddressUserType::class);
+
+        $form->handleRequest($request);
+
+        return $this->render('account/addressForm.html.twig', [
+            'addressForm' => $form->createView()
+        ]);
     }
 
 }

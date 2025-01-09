@@ -21,10 +21,10 @@ class AddressUserType extends AbstractType
             ->add('city')
             ->add('country')
             ->add('phone')
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+            // ->add('user', EntityType::class, [
+            //     'class' => User::class,
+            //     'choice_label' => 'id',
+            // ])
         ;
     }
 
