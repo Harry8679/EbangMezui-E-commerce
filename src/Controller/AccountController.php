@@ -50,4 +50,10 @@ class AccountController extends AbstractController
         return $this->render('account/addresses.html.twig');
     }
 
+    #[Route('/compte/address/ajouter', name: 'app_account_address_form')]
+    public function addressForm(): Response
+    {
+        return $this->render('account/addressesForm.html.twig');
+    }
+
 }
