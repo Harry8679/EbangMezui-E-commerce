@@ -2,18 +2,25 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Form\AddressUserType;
 use App\Form\PasswordUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class AccountController extends AbstractController
 {
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+    
     #[Route('/compte', name: 'app_account')]
     public function index(): Response
     {
@@ -21,7 +28,7 @@ class AccountController extends AbstractController
     }
 
     #[Route('/compte/modifier-votre-mot-de-passe', name: 'app_account_modify_password')]
-    public function password(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
+    public function password(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = $this->getUser();
 
@@ -32,7 +39,7 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $this->em->flush();
 
             // Redirection après soumission réussie
             $this->addFlash('success', 'Votre mot de passe a été mis à jour avec succès.');
@@ -45,22 +52,32 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #[Route('/compte/address', name: 'app_account_address')]
+    #[Route('/compte/adresse', name: 'app_account_address')]
     public function address(): Response
     {
         return $this->render('account/addresses.html.twig');
     }
 
-    #[Route('/compte/address/ajouter', name: 'app_account_address_form')]
+    #[Route('/compte/adresse/ajouter', name: 'app_account_address_form')]
     public function addressForm(Request $request): Response
     {
-        $form = $this->createForm(AddressUserType::class);
+        $address = new Address();
+        $address->setUser($this->getUser());
 
+        $form = $this->createForm(AddressUserType::class, $address);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($address);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Votre adresse a bien été enregistrée.');
+
+            $this->redirectToRoute('app_account');
+        }
 
         return $this->render('account/addressForm.html.twig', [
             'addressForm' => $form->createView()
         ]);
     }
-
 }

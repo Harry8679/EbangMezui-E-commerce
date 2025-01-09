@@ -14,7 +14,7 @@
 			<div class="col-md-8">
 				<h5>Mes adresses</h5>
 
-                {{ form_start(addressForm) }}
+				{{ form_start(addressForm, {'attr': {'data-turbo': 'false'}}) }}
 					<div class="row">
 						<div class="col-md-6">{{ form_row(addressForm.firstName) }}</div>
 						<div class="col-md-6">{{ form_row(addressForm.lastName) }}</div>
