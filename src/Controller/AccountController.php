@@ -44,7 +44,7 @@ class AccountController extends AbstractController
             // Redirection après soumission réussie
             $this->addFlash('success', 'Votre mot de passe a été mis à jour avec succès.');
 
-            return $this->redirectToRoute('app_account'); // Redirigez vers une route appropriée
+            return $this->redirectToRoute('app_account');
         }
 
         return $this->render('account/password.html.twig', [
